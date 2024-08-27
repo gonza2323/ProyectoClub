@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class RocketScipt : MonoBehaviour
 {
-    public float force = 10;
+    public float force = 1;
     private Rigidbody rb;
-    public int SpaceisPressed = 0;
+    public bool SpaceisPressed = false;
+    public float G = 10;  
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -16,22 +17,27 @@ public class RocketScipt : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+       if (Input.GetKey(KeyCode.Space))
         {
-            SpaceisPressed = 1;
+            SpaceisPressed = true;
         }
-        else
+       else
         {
-            SpaceisPressed = 0;
+            SpaceisPressed = false;
         }
-        while (SpaceisPressed == 1)
+
+        if (SpaceisPressed)
         {
+            Debug.Log("space is pressed");
             Vector3 forceDirection = Vector3.up;
             rb.AddForce(forceDirection * force, ForceMode.Impulse);
-            while (!(Input.GetKeyUp(KeyCode.Space)))
-            {
-                Thread.Sleep(10);
-            }
+
         }
+        else {
+            Debug.Log("space is NOT pressed");
+            Vector3 forceDirection = Vector3.down;
+            rb.AddForce(forceDirection * G, ForceMode.Impulse);
+        }
+        SpaceisPressed = false;
     }
 }
