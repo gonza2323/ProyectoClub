@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Mail;
 using UnityEngine;
 
-public class CapsuleScript : MonoBehaviour
+public class Part : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public string partName;
+    List<PartJoint> joints;
     void Start()
     {
         
@@ -15,4 +17,10 @@ public class CapsuleScript : MonoBehaviour
     {
         
     }
+}
+
+
+public class PartJoint {
+    public Vector3 pos;
+    public bool fuelCanGoThrough;
 }
